@@ -36,7 +36,7 @@ export default new Router()
         })
         .then(user => user.tokenCreate())
         .then(token => {
-          res.cookie('X-Token', token)
+          res.cookie('X-Slugchat-Token', token)
           res.redirect(process.env.CLIENT_URL)
         })
         .catch((error) => {
@@ -50,7 +50,7 @@ export default new Router()
     new User.createFromSignup(req.body)
       .then(user => user.tokenCreate())
       .then(token => {
-        res.cookie('X-Token', token)
+        res.cookie('X-Slugchat-Token', token)
         res.send(token)
       })
       .catch(next)
@@ -58,7 +58,7 @@ export default new Router()
   .get('/login', basicAuth, (req, res, next) => {
     req.user.tokenCreate()
       .then((token) => {
-        res.cookie('X-Token', token)
+        res.cookie('X-Slugchat-Token', token)
         res.send(token)
       })
       .catch(next)
